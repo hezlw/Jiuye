@@ -1,9 +1,11 @@
 # bsjob backend
 
+- 技术基线：JDK 17 + Spring Boot 3.x
+
 ## 启动方式
 1. 使用 MySQL 执行 `src/main/resources/schema.sql` 初始化数据库。
 2. 修改 `src/main/resources/application.yml` 中数据库账号密码。
-3. 在 IDEA 中打开 `backend` 目录并运行 `BsjobApplication`。
+3. 在 IDEA 中打开 `backend` 目录并运行 `BsjobApplication`（确保 Project SDK 为 JDK 17）。
 
 ## 主要接口
 - `POST /api/auth/register` 注册

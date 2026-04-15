@@ -4,11 +4,13 @@
 
 ```
 bsjob/
-├── backend/   # Spring Boot + MyBatis Plus + MySQL
+├── backend/   # Spring Boot 3.x + MyBatis Plus + MySQL
 └── frontend/  # 原生 HTML/CSS/JavaScript
 ```
 
 ## 一、后端启动（IDEA）
+> 运行环境：JDK 17。
+
 1. 用 IDEA 打开 `backend` 目录（Maven 项目）。
 2. 等待 Maven 依赖下载完成。
 3. 修改 `backend/src/main/resources/application.yml` 的数据库用户名和密码。
