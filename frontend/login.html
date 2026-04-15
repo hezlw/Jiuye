@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bsjob - 登录</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6fb; margin: 0; }
+    .card { width: 360px; margin: 80px auto; padding: 24px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+    h2 { margin-top: 0; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; box-sizing: border-box; }
+    button { background: #1677ff; color: #fff; border: none; cursor: pointer; }
+    .tip { margin-top: 10px; color: #666; font-size: 13px; }
+    a { color: #1677ff; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <h2>登录</h2>
+  <input id="username" placeholder="用户名" />
+  <input id="password" placeholder="密码" type="password" />
+  <button onclick="login()">登录</button>
+  <div class="tip">没有账号？<a href="register.html">去注册</a></div>
+  <div id="msg" class="tip"></div>
+</div>
+<script>
+const API = 'http://localhost:8080';
+async function login() {
+  const res = await fetch(`${API}/api/auth/login`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    })
+  });
+  const data = await res.json();
+  if (data.code === 0) {
+    localStorage.setItem('token', data.data.token);
+    localStorage.setItem('role', data.data.role);
+    location.href = 'index.html';
+  } else {
+    document.getElementById('msg').innerText = data.message;
+  }
+}
+</script>
+</body>
+</html>

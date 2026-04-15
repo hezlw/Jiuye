@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bsjob - 发布职位</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6fb; }
+    .card { width: 600px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 8px; }
+    input, textarea, button { width: 100%; box-sizing: border-box; padding: 10px; margin-top: 10px; }
+    button { background: #1677ff; color: #fff; border: none; }
+    .tip { color: #666; font-size: 13px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <h2>发布职位（企业角色）</h2>
+  <input id="title" placeholder="职位标题" />
+  <textarea id="description" placeholder="职位描述"></textarea>
+  <input id="location" placeholder="工作地点" />
+  <input id="salary" placeholder="薪资范围" />
+  <button onclick="publishJob()">发布</button>
+  <div class="tip"><a href="index.html">返回职位列表</a></div>
+  <div id="msg" class="tip"></div>
+</div>
+<script>
+const API = 'http://localhost:8080';
+function authHeader() {
+  const token = localStorage.getItem('token');
+  return token ? {'Authorization': 'Bearer ' + token} : {};
+}
+async function publishJob() {
+  const res = await fetch(`${API}/api/jobs`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', ...authHeader()},
+    body: JSON.stringify({
+      title: document.getElementById('title').value,
+      description: document.getElementById('description').value,
+      location: document.getElementById('location').value,
+      salary: document.getElementById('salary').value
+    })
+  });
+  const data = await res.json();
+  document.getElementById('msg').innerText = data.code === 0 ? '发布成功' : data.message;
+}
+</script>
+</body>
+</html>
