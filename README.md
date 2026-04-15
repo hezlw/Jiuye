@@ -40,3 +40,7 @@ bash scripts/package_code.sh
 ```
 
 打包输出文件：`dist/bsjob-code.zip`。
+
+
+## 六、升级方案（JDK17 + Spring Boot 3.x）
+详见：`docs/jdk17-springboot3-upgrade-plan.md`
