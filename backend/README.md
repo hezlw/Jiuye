@@ -15,4 +15,4 @@
 
 
 ## 常见问题
-- 如果出现 `java.lang.ExceptionInInitializerError` / `com.sun.tools.javac.code.TypeTag :: UNKNOWN`，通常是 JDK 与 Lombok 版本不兼容导致。本项目已固定 Lombok 版本并配置编译插件；请使用 `mvn clean package` 重新构建。
+- 如果出现 `java.lang.ExceptionInInitializerError` / `com.sun.tools.javac.code.TypeTag :: UNKNOWN`，通常是 Lombok 与当前 JDK 不兼容导致。本项目已经移除 Lombok 依赖，不再依赖注解处理器；请执行 `mvn clean package` 重新构建，并在 IDEA 中重新加载 Maven 项目。
